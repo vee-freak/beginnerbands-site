@@ -259,28 +259,23 @@ em{font-style:italic}
   .hero__fig{order:2}
 }
 
-/* Justin stands inside a soft brand panel: it fills the column, explains the
-   surrounding space, and his white studio background multiplies straight into
-   the gradient so there is no cutout edge anywhere. */
 .hero__fig{
-  margin:0;position:relative;justify-self:stretch;
-  width:100%;height:min(78vh,700px);
+  margin:0;position:relative;justify-self:center;
+  /* height-led so Justin always fits the viewport rather than overflowing it */
+  height:min(78vh,700px);
   display:flex;align-items:flex-end;justify-content:center;
-  background:linear-gradient(170deg,#F4F9FC 0%,#E9F3FA 60%,#E2EFF8 100%);
-  border-radius:var(--r-lg);
-  overflow:hidden;
 }
 .hero__fig img{
-  width:auto;height:97%;object-fit:contain;
+  width:auto;height:100%;object-fit:contain;
   /* the source is a white-background cutout — multiply drops the white
-     into the panel behind it, no alpha channel required */
+     into the page background, no alpha channel required */
   mix-blend-mode:multiply;
   animation:heroFloat 7s ease-in-out 1.2s infinite alternate;
 }
 @keyframes heroFloat{from{transform:translateY(0)}to{transform:translateY(-14px)}}
 
 .hero__fig figcaption{
-  position:absolute;left:18px;bottom:18px;
+  position:absolute;left:50%;translate:-50% 0;bottom:0;
   display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap;
   background:rgba(255,255,255,.92);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
@@ -926,8 +921,7 @@ h1 em{color:var(--blue-600)}
   .hero::after{right:-24%;width:78%}
   .hero__in{grid-template-columns:1fr}
   .hero__copy{order:1}
-  .hero__fig{order:2;height:min(52vh,420px);margin-top:14px}
-  .hero__fig figcaption{left:50%;translate:-50% 0;bottom:14px}
+  .hero__fig{order:2;height:min(50vh,400px);margin-top:12px}
   .buy{max-width:none}
   /* leave room for the sticky buy bar */
   body{padding-bottom:80px}
