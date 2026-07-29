@@ -128,20 +128,68 @@ em{font-style:italic}
   transition:width .4s var(--ease)}
 .hdr.stuck .brand img{width:clamp(96px,9vw,116px)}
 
-.hdr__nav{display:none;margin-left:auto;gap:30px;font-size:16.5px;font-weight:500}
-.hdr__nav a{text-decoration:none;color:var(--ink-70);position:relative;padding-block:6px;
-  transition:color .25s var(--ease)}
-.hdr__nav a::after{
-  content:'';position:absolute;left:0;right:0;bottom:0;height:2.5px;
-  background:var(--blue);transform:scaleX(0);transform-origin:left;
-  transition:transform .35s var(--ease);
+/* Mobile-first: the nav is a drop-down panel; it becomes an inline row at 900px. */
+.hdr__nav{
+  position:absolute;top:100%;left:0;right:0;
+  display:grid;gap:2px;
+  background:var(--paper);
+  border-top:1px solid var(--line);
+  padding:8px var(--pad) 20px;
+  box-shadow:0 24px 48px -24px rgba(14,36,57,.35);
+  visibility:hidden;opacity:0;transform:translateY(-10px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;
+}
+.hdr__nav.open{visibility:visible;opacity:1;transform:none}
+.hdr__nav a{
+  display:flex;align-items:center;min-height:52px;
+  text-decoration:none;color:var(--ink);font-size:18px;font-weight:600;
+  position:relative;
+  transition:color .25s var(--ease);
 }
 .hdr__nav a:hover{color:var(--blue-cta)}
-.hdr__nav a:hover::after{transform:scaleX(1)}
-.hdr .btn--sm{margin-left:auto}
+.hdr__nav .btn{margin-top:12px;justify-content:center;font-size:16px;color:#fff}
+
+/* hamburger */
+.hdr__toggle{
+  display:grid;place-items:center;margin-left:auto;
+  width:46px;height:46px;padding:0;border:0;background:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.hdr__bars{position:relative;display:block;width:24px;height:2.5px;border-radius:2px;
+  background:var(--navy);transition:background .2s var(--ease)}
+.hdr__bars::before,.hdr__bars::after{
+  content:'';position:absolute;left:0;width:24px;height:2.5px;border-radius:2px;
+  background:var(--navy);transition:transform .35s var(--ease);
+}
+.hdr__bars::before{top:-8px}
+.hdr__bars::after{top:8px}
+.hdr__toggle[aria-expanded="true"] .hdr__bars{background:transparent}
+.hdr__toggle[aria-expanded="true"] .hdr__bars::before{transform:translateY(8px) rotate(45deg)}
+.hdr__toggle[aria-expanded="true"] .hdr__bars::after{transform:translateY(-8px) rotate(-45deg)}
+
 @media (min-width:900px){
-  .hdr__nav{display:flex}
-  .hdr .btn--sm{margin-left:0}
+  .hdr__in{position:relative}
+  .hdr__toggle{display:none}
+  .hdr__nav{
+    position:static;visibility:visible;opacity:1;transform:none;
+    display:flex;align-items:center;margin-left:auto;gap:30px;
+    background:none;border:0;padding:0;box-shadow:none;
+  }
+  .hdr__nav a{
+    min-height:0;font-size:16.5px;font-weight:500;color:var(--ink-70);
+    padding-block:6px;
+  }
+  .hdr__nav a::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:2.5px;
+    background:var(--blue);transform:scaleX(0);transform-origin:left;
+    transition:transform .35s var(--ease);
+  }
+  .hdr__nav a:hover::after{transform:scaleX(1)}
+  .hdr__nav .btn{margin-top:0;font-size:15.5px;color:#fff}
+  .hdr__nav .btn::after{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .hdr__nav,.hdr__bars,.hdr__bars::before,.hdr__bars::after{transition:none}
 }
 
 /* ═══════════════ BUTTONS ═══════════════ */
@@ -882,10 +930,7 @@ h1 em{color:var(--blue-600)}
   body{padding-bottom:80px}
 }
 @media (max-width:600px){
-  /* the hero buy card and the sticky bottom bar already carry the CTA,
-     so the header keeps just the logo and stays out of the way */
-  .hdr .btn--sm{display:none}
-  .brand img{width:106px}
+  .brand img{width:104px}
 }
 @media (max-width:560px){
   .eyebrow{font-size:14px;padding:8px 14px;gap:8px}
@@ -895,8 +940,8 @@ h1 em{color:var(--blue-600)}
   .seg__btn{font-size:13.5px;padding-inline:6px;gap:6px}
   .buy__where{gap:8px}
   .buy__whereLabel{width:100%}
-  .btn--xl{flex-direction:column;gap:4px;padding-block:18px;min-height:64px}
-  .btn__price{border-left:0;padding-left:0;font-size:.86em}
+  .btn--xl{padding:15px 18px;min-height:56px;font-size:17px;flex-wrap:nowrap}
+  .btn__price{padding-left:10px;margin-left:8px;font-size:.85em}
   .ladder__row{gap:12px}
   .ladder__lab{font-size:13px;white-space:normal}
 }

@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Source+Sans+3:ital,wght@0,400..700;1,400..600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=8">
 
 <script type="application/ld+json">
 {
@@ -44,16 +44,21 @@
       <img src="assets/img/logo.png" alt="JA Beginner Bands" width="150" height="86">
     </a>
 
-    <nav class="hdr__nav" aria-label="Main">
+    <button class="hdr__toggle" id="navToggle" type="button"
+            aria-expanded="false" aria-controls="siteNav">
+      <span class="hdr__bars" aria-hidden="true"></span>
+      <span class="sr">Menu</span>
+    </button>
+
+    <nav class="hdr__nav" id="siteNav" aria-label="Main">
       <a href="#inside">What's inside</a>
       <a href="#fabric">Why fabric</a>
       <a href="#videos">Free workouts</a>
       <a href="#faq">FAQ</a>
+      <a class="btn btn--sm js-buy" href="#buy" data-store="auto">
+        <span class="btn__label">Buy on Amazon</span>
+      </a>
     </nav>
-
-    <a class="btn btn--sm js-buy" href="#buy" data-store="auto">
-      <span class="btn__label">Buy on Amazon</span>
-    </a>
   </div>
 </header>
 
@@ -561,6 +566,6 @@
   </div>
 </div>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>

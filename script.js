@@ -296,7 +296,36 @@
   });
 
   /* ─────────────────────────────────────────────────────────
-     7. WELCOME VIDEO — poster overlay until first play
+     7. MOBILE MENU
+     ───────────────────────────────────────────────────────── */
+  var navToggle = $('#navToggle');
+  var siteNav = $('#siteNav');
+  if (navToggle && siteNav) {
+    var setNav = function (open) {
+      navToggle.setAttribute('aria-expanded', String(open));
+      siteNav.classList.toggle('open', open);
+    };
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setNav(navToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    // close on link tap, outside click, Escape, or once we're back on desktop
+    siteNav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setNav(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (!siteNav.contains(e.target) && !navToggle.contains(e.target)) setNav(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.key === 'Esc') setNav(false);
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 900) setNav(false);
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     8. WELCOME VIDEO — poster overlay until first play
      ───────────────────────────────────────────────────────── */
   var wVid = $('#welcomeVid');
   var wPlay = $('#welcomePlay');
@@ -312,7 +341,7 @@
   }
 
   /* ─────────────────────────────────────────────────────────
-     8. SMOOTH ANCHORS (offset for the fixed header)
+     9. SMOOTH ANCHORS (offset for the fixed header)
      ───────────────────────────────────────────────────────── */
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]');
@@ -329,7 +358,7 @@
   });
 
   /* ─────────────────────────────────────────────────────────
-     9. MISC
+     10. MISC
      ───────────────────────────────────────────────────────── */
   var yr = $('.js-year');
   if (yr) yr.textContent = new Date().getFullYear();
