@@ -578,7 +578,8 @@ h1 em{color:var(--blue-600)}
 .fabric__body h2 em{color:var(--blue-600)}
 
 .vs{width:100%;border-collapse:collapse;margin-top:30px;font-size:16px}
-.vs th,.vs td{padding:15px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.vs th,.vs td{padding:15px 12px;text-align:left;border-bottom:1px solid var(--line);
+  vertical-align:top}
 .vs thead th{
   font-family:var(--font);font-size:13.5px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--ink-70);padding-bottom:10px;
@@ -586,23 +587,40 @@ h1 em{color:var(--blue-600)}
 .vs thead th:nth-child(2){color:var(--blue-cta)}
 .vs tbody th{font-weight:600;color:var(--ink);width:34%}
 .vs td{color:var(--ink-70);font-weight:500}
-.vs .yes{color:var(--ink);font-weight:600;position:relative;padding-left:30px}
-/* single-image marker: circle and tick move together, aligned to the first line */
-.vs .yes::before{
-  content:'';position:absolute;left:4px;top:.3em;
+.vs .yes{color:var(--ink);font-weight:600}
+.vs .no{opacity:.72}
+
+/* Marker lives on the span so the circle and tick are one element and always
+   sit on the first line, however the value wraps. */
+.vs td span{position:relative;display:inline-block;padding-left:26px}
+.vs td span::before{
+  content:'';position:absolute;left:0;top:.28em;
   width:17px;height:17px;border-radius:50%;
+}
+.vs .yes span::before{
   background:var(--blue-cta) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.2 5.3 4.3 7.4 7.9 3.1' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px 10px no-repeat;
 }
-.vs .no{padding-left:30px;position:relative;opacity:.72}
-.vs .no::before{
-  content:'';position:absolute;left:4px;top:.3em;
-  width:17px;height:17px;border-radius:50%;border:2px solid #CFC7BC;
-}
-@media (max-width:520px){
-  .vs{font-size:15px}
-  .vs th,.vs td{padding:12px 6px}
-  .vs tbody th{width:32%}
-  .vs .yes,.vs .no{padding-left:26px}
+.vs .no span::before{border:2px solid #CFC7BC}
+
+/* ─── Phones: stack each attribute instead of squeezing three columns.
+       Explicit ARIA roles in the markup keep the table semantics. ─── */
+@media (max-width:600px){
+  .vs{margin-top:26px}
+  .vs thead{display:none}
+  .vs tbody,.vs tbody tr,.vs tbody th,.vs tbody td{display:block;width:auto}
+  .vs tbody tr{padding-block:18px;border-bottom:1px solid var(--line)}
+  .vs tbody tr:last-child{border-bottom:0}
+  .vs tbody th{padding:0 0 12px;border:0;font-size:16.5px}
+  .vs tbody td{
+    display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:start;
+    padding:5px 0;border:0;
+  }
+  .vs tbody td::before{
+    content:attr(data-col);
+    font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-70);padding-top:5px;
+  }
+  .vs .yes::before{color:var(--blue-cta)}
 }
 
 /* ═══════════════ STEPS ═══════════════ */
@@ -864,8 +882,10 @@ h1 em{color:var(--blue-600)}
   body{padding-bottom:80px}
 }
 @media (max-width:600px){
-  .brand img{width:98px}
-  .hdr .btn--sm{padding:9px 16px;font-size:14px;min-height:40px}
+  /* the hero buy card and the sticky bottom bar already carry the CTA,
+     so the header keeps just the logo and stays out of the way */
+  .hdr .btn--sm{display:none}
+  .brand img{width:106px}
 }
 @media (max-width:560px){
   .eyebrow{font-size:14px;padding:8px 14px;gap:8px}
