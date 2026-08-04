@@ -29,7 +29,7 @@
       short: 'Amazon.ca',
       host: 'https://www.amazon.ca',
       tag: '',
-      price: 67.79,
+      price: 62.99,
       currency: 'CAD',
       locale: 'en-CA'
     }
@@ -75,7 +75,7 @@
     return url;
   }
 
-  // "$49.99 USD" / "$67.79 CAD" — the code is spelled out so a shopper is never
+  // "$49.99 USD" / "$62.99 CAD" — the code is spelled out so a shopper is never
   // guessing which dollar they're looking at.
   function money(key) {
     var s = STORES[key];

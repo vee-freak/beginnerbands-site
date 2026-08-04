@@ -37,13 +37,13 @@ var ASIN = 'B0DLPWCJYR';
 
 var STORES = {
   us: { host: 'https://www.amazon.com', tag: '', price: 49.99, currency: 'USD', ... },
-  ca: { host: 'https://www.amazon.ca',  tag: '', price: 67.79, currency: 'CAD', ... }
+  ca: { host: 'https://www.amazon.ca',  tag: '', price: 62.99, currency: 'CAD', ... }
 };
 ```
 
 - **`tag`** — your Amazon Associates tracking id. Leave `''` if unused.
-- **`price`** — display only, rendered as "$49.99 USD" / "$67.79 CAD". Amazon is
-  the source of truth; refresh when pricing moves. Verified 28 Jul 2026.
+- **`price`** — display only, rendered as "$49.99 USD" / "$62.99 CAD". Amazon is
+  the source of truth; refresh when pricing moves. Verified 4 Aug 2026: US $49.99, CA $62.99.
 
 Every link with `class="js-buy" data-store="auto"` follows the visitor's selected
 country; fixed `data-store="us"`/`"ca"` links (footer) always point at that store.
