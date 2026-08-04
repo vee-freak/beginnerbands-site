@@ -587,6 +587,8 @@ h1 em{color:var(--blue-600)}
   border:1px solid var(--line)}
 @media (max-width:939px){.inside__fig{position:static}}
 .inside__fig img{width:100%}
+/* white-background product shot: multiply melts the white into the card */
+.cutout{mix-blend-mode:multiply}
 
 .inside__list{list-style:none;margin:0;padding:0;counter-reset:i}
 .inside__list li{
