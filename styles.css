@@ -327,15 +327,6 @@ h1 em{color:var(--blue-600)}
 }
 .lede strong{color:var(--ink);font-weight:600}
 
-.chips{
-  display:flex;flex-wrap:wrap;gap:9px;list-style:none;padding:0;margin:20px 0 0;
-}
-.chips li{
-  background:rgba(255,255,255,.8);border:1px solid var(--line);
-  border-radius:var(--r-pill);padding:8px 16px;
-  font-size:14.5px;font-weight:500;color:var(--ink-70);
-}
-.chips b{color:var(--blue-cta);font-weight:700;margin-right:2px}
 
 .hero__cue{
   position:absolute;left:50%;bottom:18px;translate:-50% 0;
@@ -350,6 +341,15 @@ h1 em{color:var(--blue-600)}
 @keyframes cue{0%,100%{transform:translateY(0);opacity:0}30%{opacity:1}70%{transform:translateY(15px);opacity:0}}
 @media (min-width:1000px) and (min-height:760px){.hero__cue{display:block}}
 
+/* Names the category before anything else is read. */
+.hero__desc{
+  display:flex;align-items:center;gap:10px;
+  margin:0 0 14px;
+  font-size:13.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--blue-cta);
+}
+.hero__desc::before{content:'';width:24px;height:2px;background:var(--blue);flex:0 0 auto}
+
 /* ─────────── Buy block ─────────── */
 .buy{
   background:rgba(255,255,255,.93);
@@ -360,6 +360,20 @@ h1 em{color:var(--blue-600)}
   box-shadow:var(--shadow-lg);
   max-width:520px;
 }
+.buy__product{
+  display:flex;align-items:center;gap:14px;
+  padding-bottom:16px;margin-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.buy__product img{
+  width:64px;height:64px;flex:0 0 auto;object-fit:contain;
+  border-radius:var(--r-sm);background:var(--cream);
+}
+.buy__product b{display:block;font-size:15.5px;font-weight:700;line-height:1.25}
+.buy__product span{
+  display:block;margin-top:3px;font-size:13.5px;color:var(--ink-70);line-height:1.35;
+}
+
 .buy__where{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
 .buy__whereLabel{font-size:14.5px;font-weight:500;color:var(--ink-70)}
 
@@ -914,7 +928,7 @@ h1 em{color:var(--blue-600)}
 @media (max-width:900px){
   .hero{
     min-height:0;
-    padding-top:clamp(92px,17vh,120px);
+    padding-top:clamp(84px,11vh,100px);
     padding-bottom:clamp(24px,5vw,40px);
     background:
       radial-gradient(70% 34% at 50% 86%,#fff 0%,rgba(255,255,255,0) 70%),
@@ -932,7 +946,15 @@ h1 em{color:var(--blue-600)}
   .brand img{width:104px}
 }
 @media (max-width:560px){
-  .eyebrow{font-size:14px;padding:8px 14px;gap:8px}
+  .eyebrow{font-size:13.5px;padding:7px 13px;gap:8px;margin-bottom:12px}
+  .eyebrow__long{display:none}          /* "Amazon ratings" -> "ratings" */
+  .hero__desc{font-size:12.5px;margin-bottom:12px;gap:8px}
+  .hero__desc::before{width:18px}
+  .lede{margin-bottom:20px}
+  .buy{padding:16px}
+  .buy__product{padding-bottom:13px;margin-bottom:13px}
+  .buy__product img{width:56px;height:56px}
+  .buy__where{margin-bottom:13px}
   .stars{width:80px;height:15px}
   .stars::before,.stars .stars__fill::before{font-size:15px;line-height:15px;letter-spacing:1.2px}
   .seg{min-width:0}
